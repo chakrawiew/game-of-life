@@ -10,13 +10,13 @@ pipeline
 
 	stages
 	{
-		stage ('building project')
+		/*stage ('building project')
 		{
 			steps
 			{	
 				sh "mvn clean install"
 			}
-		}
+		}*/
 		
 		stage ('deploying war on slave-1')
 		{
