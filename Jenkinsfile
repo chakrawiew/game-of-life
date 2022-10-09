@@ -25,7 +25,7 @@ pipeline
 			{
 				label 
 				{
-					label '172.31.44.255'
+					label 'built-in'
 				}
 			}			
 
