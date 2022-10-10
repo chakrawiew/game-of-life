@@ -1,22 +1,22 @@
 pipeline 
 {
-	/*agent 
+	agent 
 	{
 		label 
 		{
 			label '172.31.44.255'
 		}
-	}*/
+	}
 
 	stages
 	{
-		agent 
+		/*agent 
 		{
 			label 
 			{
 				label '172.31.44.255'
 			}
-		}		
+		}*/		
 		
 		stage ('building project on slave-1')
 		{
