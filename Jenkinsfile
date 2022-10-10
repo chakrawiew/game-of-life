@@ -52,7 +52,7 @@ pipeline
 					sh "./startup.sh"
 					echo "Tomcat started"
 				}
-			
+			}
 		}		
 
 
