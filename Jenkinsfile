@@ -10,7 +10,7 @@ pipeline
 
 	stages
 	{
-		stage ('building project')
+		/*stage ('building project')
 		{
 			steps
 			{	
@@ -41,7 +41,7 @@ pipeline
 				sh "cp /home/ec2-user/jenkins-slave-1/workspace/Assignment-4/gameoflife-web/target/gameoflife.war  /home/ec2-user/apache-tomcat-9.0.67/webapps/"		
 
 			}
-		}
+		}*/
 
 		stage ('start Tomcat')
 		{
