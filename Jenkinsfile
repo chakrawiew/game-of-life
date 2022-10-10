@@ -49,7 +49,7 @@ pipeline
 			{
 				dir('/home/ec2-user/apache-tomcat-9.0.67/bin')
 				{
-					sh "./startup.sh"
+					sh "sudo ./startup.sh"
 					echo "Tomcat started"
 				}
 			}
