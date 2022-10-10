@@ -27,7 +27,7 @@ pipeline
 					sh "./shutdown.sh"
 					echo "Tomcat stopped"
 				}
-			
+			}
 		}
 
 
