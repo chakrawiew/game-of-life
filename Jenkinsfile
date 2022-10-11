@@ -67,11 +67,11 @@ pipeline
 			{	
 				cleanWs()	// Clean before build
 				checkout scm	// We need to explicitly checkout from SCM here
-				//sh "mvn clean install"
+				sh "mvn clean install"
 			}
 		}
 		
-		/*stage ('Deployment on slave-2')
+		stage ('Deployment on slave-2')
 		{
 			agent 
 			{
@@ -97,7 +97,7 @@ pipeline
 					//echo "Tomcat started"
 				}
 			}
-		}*/
+		}
 
 		/*stage ('building project on slave-3')
 		{
