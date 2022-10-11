@@ -49,7 +49,7 @@ pipeline
 
 		
 
-		stage ('building project on slave-2')
+		/*stage ('building project on slave-2')
 		{
 		
 			agent 
@@ -137,7 +137,7 @@ pipeline
 					echo "Tomcat started"
 				}
 			}
-		}
+		}*/
 		
 
 
