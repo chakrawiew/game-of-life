@@ -38,7 +38,7 @@ pipeline
 			{
 				dir('/home/ec2-user/apache-tomcat-9.0.67/bin')
 				{
-					sh "./shutdown.sh"
+					sh "sudo ./shutdown.sh"
 					echo "Tomcat stopped"
 
 					echo "deploying war on slave-1"
@@ -89,7 +89,7 @@ pipeline
 			{
 				dir('/home/ec2-user/apache-tomcat-9.0.67/bin')
 				{
-					sh "./shutdown.sh"
+					sh "sudo ./shutdown.sh"
 					echo "Tomcat stopped"
 
 					echo "deploying war on slave-2"
@@ -136,7 +136,7 @@ pipeline
 			{
 				dir('/home/ec2-user/apache-tomcat-9.0.67/bin')
 				{
-					sh "./shutdown.sh"
+					sh "sudo ./shutdown.sh"
 					echo "Tomcat stopped"
 
 					echo "deploying war on slave-3"
