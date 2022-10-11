@@ -23,11 +23,11 @@ pipeline
 			steps
 			{	
 				cleanWs()
-				sh "mvn clean install"
+				//sh "mvn clean install"
 			}
 		}
 
-		stage ('Deployment on slave-1')
+		/*stage ('Deployment on slave-1')
 		{
 			steps
 			{
@@ -45,7 +45,7 @@ pipeline
 					//echo "Tomcat started"
 				}
 			}
-		}
+		}*/
 
 
 		
