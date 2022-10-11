@@ -142,7 +142,7 @@ pipeline
 					echo "deploying war on slave-3"
 
 				sh "sudo rm -rf /home/ec2-user/apache-tomcat-9.0.67/webapps/gameoflife*"
-				sh "sudo cp /home/ec2-user/jenkins-slave-2/workspace/Assignment-4/gameoflife-web/target/gameoflife.war  /home/ec2-user/apache-tomcat-9.0.67/webapps/"
+				sh "sudo cp /home/ec2-user/jenkins-slave-3/workspace/Assignment-4/gameoflife-web/target/gameoflife.war  /home/ec2-user/apache-tomcat-9.0.67/webapps/"
 
 					sh "sudo ./startup.sh"
 					//echo "Tomcat started"
