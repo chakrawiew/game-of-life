@@ -110,7 +110,7 @@ pipeline
 			{
 				label 
 				{
-					label '172.31.34.216'
+					label '172.31.39.23'
 				}
 			}
 
@@ -128,7 +128,7 @@ pipeline
 			{
 				label 
 				{
-					label '172.31.34.216'
+					label '172.31.39.23'
 				}
 			}			
 
