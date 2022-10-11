@@ -1,6 +1,6 @@
 // Declarative pipeline
 // Build & deploy on multiple slave. 
-//Sequential execution.
+// Sequential execution.
 
 pipeline 
 {
@@ -21,7 +21,7 @@ pipeline
 	stages
 	{		
 		
-		/*stage ('building project on slave-1')
+		stage ('building project on slave-1')
 		{
 			steps
 			{	
@@ -30,9 +30,9 @@ pipeline
 
 				//sh "mvn clean install"
 			}
-		}*/
+		}
 
-		/*stage ('Deployment on slave-1')
+		stage ('Deployment on slave-1')
 		{
 			steps
 			{
@@ -51,12 +51,12 @@ pipeline
 					//echo "Tomcat started"
 				}
 			}
-		}*/
+		}
 
 
 		
 
-		/*stage ('building project on slave-2')
+		stage ('building project on slave-2')
 		{
 		
 			agent 
@@ -101,7 +101,7 @@ pipeline
 					//echo "Tomcat started"
 				}
 			}
-		}*/
+		}
 
 		stage ('building project on slave-3')
 		{
