@@ -1,3 +1,7 @@
+// Declarative pipeline  Parallel execution.
+// Build & deploy on multiple slave. 
+
+
 pipeline 
 {
 	agent 
@@ -16,142 +20,142 @@ pipeline
 
 	stages
 	{
-	   stage('parallel-stages')
-	   {
-	     parallel
-	     {		
+		stage('parallel-stages')
+	   	{
+	     		parallel
+	     		{		
 		
-		stage ('building project on slave-1')
-		{
-			steps
-			{	
-				cleanWs()	// Clean before build
-				checkout scm	// We need to explicitly checkout from SCM here
-
-				sh "mvn clean install"
-			}
-		}
-
-		stage ('Deployment on slave-1')
-		{
-			steps
-			{
-				dir('/home/ec2-user/apache-tomcat-9.0.67/bin')
+				stage ('building project on slave-1')
 				{
-					sh "sudo ./shutdown.sh"
-					echo "Tomcat stopped"
+					steps
+					{	
+						cleanWs()	// Clean before build
+						checkout scm	// We need to explicitly checkout from SCM here
 
-					echo "deploying war on slave-1"
-
-				sh "sudo rm -rf /home/ec2-user/apache-tomcat-9.0.67/webapps/gameoflife*"
-
-				sh "sudo cp /home/ec2-user/jenkins-slave-1/workspace/Assignment-4/gameoflife-web/target/gameoflife.war  /home/ec2-user/apache-tomcat-9.0.67/webapps/"
-
-					sh "sudo ./startup.sh"
-					//echo "Tomcat started"
+						sh "mvn clean install"
+					}
 				}
-			}
-		}
+
+				stage ('Deployment on slave-1')
+				{
+					steps
+					{
+						dir('/home/ec2-user/apache-tomcat-9.0.67/bin')
+						{
+							sh "sudo ./shutdown.sh"
+							echo "Tomcat stopped"
+
+							echo "deploying war on slave-1"
+
+							sh "sudo rm -rf /home/ec2-user/apache-tomcat-9.0.67/webapps/gameoflife*"
+
+							sh "sudo cp /home/ec2-user/jenkins-slave-1/workspace/Assignment-4/gameoflife-web/target/gameoflife.war  /home/ec2-user/apache-tomcat-9.0.67/webapps/"
+
+							sh "sudo ./startup.sh"
+							//echo "Tomcat started"
+						}
+					}
+				}
 
 
 		
 
-		stage ('building project on slave-2')
-		{
+				stage ('building project on slave-2')
+				{
 		
-			agent 
-			{
-				label 
-				{
-					label '172.31.34.216'
-				}
-			}
+					agent 
+					{
+						label 
+						{
+							label '172.31.34.216'
+						}
+					}
 
-			steps
-			{	
-				cleanWs()	// Clean before build
-				checkout scm	// We need to explicitly checkout from SCM here
-				sh "mvn clean install"
-			}
-		}
+					steps
+					{	
+						cleanWs()	// Clean before build
+						checkout scm	// We need to explicitly checkout from SCM here
+						sh "mvn clean install"
+					}
+				}
 		
-		stage ('Deployment on slave-2')
-		{
-			agent 
-			{
-				label 
+				stage ('Deployment on slave-2')
 				{
-					label '172.31.34.216'
-				}
-			}			
+					agent 
+					{
+						label 
+						{
+							label '172.31.34.216'
+						}
+					}			
 
-			steps
-			{
-				dir('/home/ec2-user/apache-tomcat-9.0.67/bin')
+					steps
+					{
+						dir('/home/ec2-user/apache-tomcat-9.0.67/bin')
+						{
+							sh "sudo ./shutdown.sh"
+							echo "Tomcat stopped"
+
+							echo "deploying war on slave-2"
+
+							sh "sudo rm -rf /home/ec2-user/apache-tomcat-9.0.67/webapps/gameoflife*"
+							sh "sudo cp /home/ec2-user/jenkins-slave-2/workspace/Assignment-4/gameoflife-web/target/gameoflife.war  /home/ec2-user/apache-tomcat-9.0.67/webapps/"
+
+							sh "sudo ./startup.sh"
+							//echo "Tomcat started"
+						}
+					}
+				}
+
+				stage ('building project on slave-3')
 				{
-					sh "sudo ./shutdown.sh"
-					echo "Tomcat stopped"
-
-					echo "deploying war on slave-2"
-
-				sh "sudo rm -rf /home/ec2-user/apache-tomcat-9.0.67/webapps/gameoflife*"
-				sh "sudo cp /home/ec2-user/jenkins-slave-2/workspace/Assignment-4/gameoflife-web/target/gameoflife.war  /home/ec2-user/apache-tomcat-9.0.67/webapps/"
-
-					sh "sudo ./startup.sh"
-					//echo "Tomcat started"
-				}
-			}
-		}
-
-		stage ('building project on slave-3')
-		{
 		
-			agent 
-			{
-				label 
-				{
-					label '172.31.39.23'
-				}
-			}
+					agent 
+					{
+						label 
+						{
+							label '172.31.39.23'
+						}
+					}
 
-			steps
-			{	
-				cleanWs()	// Clean before build
-				checkout scm	// We need to explicitly checkout from SCM here
-				sh "mvn clean install"
-			}
-		}
+					steps
+					{	
+						cleanWs()	// Clean before build
+						checkout scm	// We need to explicitly checkout from SCM here
+						sh "mvn clean install"
+					}
+				}
 		
-		stage ('Deployment on slave-3')
-		{
-			agent 
-			{
-				label 
+				stage ('Deployment on slave-3')
 				{
-					label '172.31.39.23'
+					agent 
+					{
+						label 
+						{
+							label '172.31.39.23'
+						}
+					}			
+
+					steps
+					{
+						dir('/home/ec2-user/apache-tomcat-9.0.67/bin')
+						{
+							sh "sudo ./shutdown.sh"
+							echo "Tomcat stopped"
+
+							echo "deploying war on slave-3"
+
+							sh "sudo rm -rf /home/ec2-user/apache-tomcat-9.0.67/webapps/gameoflife*"
+							sh "sudo cp /home/ec2-user/jenkins-slave-3/workspace/Assignment-4/gameoflife-web/target/gameoflife.war  /home/ec2-user/apache-tomcat-9.0.67/webapps/"
+
+							sh "sudo ./startup.sh"
+							//echo "Tomcat started"
+						}
+					}
 				}
-			}			
-
-			steps
-			{
-				dir('/home/ec2-user/apache-tomcat-9.0.67/bin')
-				{
-					sh "sudo ./shutdown.sh"
-					echo "Tomcat stopped"
-
-					echo "deploying war on slave-3"
-
-				sh "sudo rm -rf /home/ec2-user/apache-tomcat-9.0.67/webapps/gameoflife*"
-				sh "sudo cp /home/ec2-user/jenkins-slave-3/workspace/Assignment-4/gameoflife-web/target/gameoflife.war  /home/ec2-user/apache-tomcat-9.0.67/webapps/"
-
-					sh "sudo ./startup.sh"
-					//echo "Tomcat started"
-				}
-			}
-		}
-	      }	
+	     		 }	
 		
-	   }
+	   	}
 
 	}
 }
