@@ -1,6 +1,8 @@
 pipeline
 {
 
+stages
+{
 stage('Start Tomcat')
 {
 	parallel
@@ -64,4 +66,5 @@ stage('Start Tomcat')
 	 }
 }
 
+}
 }
