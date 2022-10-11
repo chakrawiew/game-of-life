@@ -5,8 +5,81 @@ pipeline
 		label 'built-in'
 	}
 
+	options 
+	{
+        	skipDefaultCheckout(true)	        // This is required if you want to clean before build
+
+    	}
+
 stages
 {
+
+	stage('Building & Packaging')
+	{
+		parallel
+		{
+			stage('Slave-1')
+			{
+				agent 
+				{
+					node 
+					{
+						label '172.31.44.255'
+					}
+				}			
+		
+				steps
+				{
+					cleanWs()	// Clean before build
+					checkout scm	// We need to explicitly checkout from SCM here
+
+					sh "mvn clean install"
+				}
+			}
+
+			stage('Slave-2')
+			{
+				agent 
+				{
+					node 
+					{
+						label '172.31.34.216'
+					}
+				}		
+
+				steps
+				{
+					cleanWs()	// Clean before build
+					checkout scm	// We need to explicitly checkout from SCM here
+
+					sh "mvn clean install"
+				}
+			}
+	
+			stage('Slave-3')
+			{
+				agent 
+				{
+					node 
+					{
+						label '172.31.39.23'
+					}
+				}
+
+				steps
+				{
+					cleanWs()	// Clean before build
+					checkout scm	// We need to explicitly checkout from SCM here
+
+					sh "mvn clean install"
+				}
+			}
+	 	}
+	}
+
+
+
+//--------------------------
 	stage('Stop Tomcat')
 	{
 		parallel
