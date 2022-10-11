@@ -1,4 +1,4 @@
-// Declarative pipeline  Sequential execution.
+// Declarative pipeline  Parallel execution.
 // Build & deploy on multiple slave. 
 
 
@@ -19,7 +19,9 @@ pipeline
     	}
 
 	stages
-	{		
+	{
+		stage('parallel-stages')
+		{		
 		
 		stage ('building project on slave-1')
 		{
@@ -151,7 +153,7 @@ pipeline
 		}
 		
 		
-
+		}
 
 	}
 }
