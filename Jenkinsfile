@@ -1,6 +1,6 @@
-// Declarative pipeline
+// Declarative pipeline  Sequential execution.
 // Build & deploy on multiple slave. 
-// Sequential execution.
+
 
 pipeline 
 {
