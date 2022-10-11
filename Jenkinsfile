@@ -1,7 +1,3 @@
-// Declarative pipeline  Parallel execution.
-// Build & deploy on multiple slave. 
-
-
 pipeline 
 {
 	agent 
@@ -20,8 +16,10 @@ pipeline
 
 	stages
 	{
-		stage('parallel-stages')
-		{		
+	   stage('parallel-stages')
+	   {
+	     parallel
+	     {		
 		
 		stage ('building project on slave-1')
 		{
@@ -151,9 +149,9 @@ pipeline
 				}
 			}
 		}
+	      }	
 		
-		
-		}
+	   }
 
 	}
 }
