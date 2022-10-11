@@ -1,3 +1,6 @@
+// Declarative pipeline  Parallel execution.
+// Build & deploy on multiple slave. 
+
 pipeline
 {
 	agent
