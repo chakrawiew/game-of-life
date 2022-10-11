@@ -28,7 +28,7 @@ pipeline
 				cleanWs()	// Clean before build
 				checkout scm	// We need to explicitly checkout from SCM here
 
-				//sh "mvn clean install"
+				sh "mvn clean install"
 			}
 		}
 
