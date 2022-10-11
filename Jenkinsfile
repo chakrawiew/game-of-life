@@ -163,6 +163,7 @@ stages
 				{
 					dir('/home/ec2-user/apache-tomcat-9.0.67/webapps/')
 					{
+						sh"sudo rm -rf gameoflife*"
 						sh"sudo cp /home/ec2-user/jenkins-slave-1/workspace/Assignment-4/gameoflife-web/target/gameoflife.war ."
 					}
 				}
@@ -182,6 +183,7 @@ stages
 				{
 					dir('/home/ec2-user/apache-tomcat-9.0.67/webapps/')
 					{
+						sh"sudo rm -rf gameoflife*"
 						sh"sudo cp /home/ec2-user/jenkins-slave-2/workspace/Assignment-4/gameoflife-web/target/gameoflife.war ."
 					}
 				}
@@ -201,6 +203,7 @@ stages
 				{
 					dir('/home/ec2-user/apache-tomcat-9.0.67/webapps/')
 					{
+						sh"sudo rm -rf gameoflife*"
 						sh"sudo cp /home/ec2-user/jenkins-slave-3/workspace/Assignment-4/gameoflife-web/target/gameoflife.war ."
 					}
 				}
