@@ -7,6 +7,12 @@ pipeline
 			label '172.31.44.255'
 		}
 	}
+	
+	options 
+	{
+        	skipDefaultCheckout(true)	        // This is required if you want to clean before build
+
+    	}
 
 	stages
 	{
@@ -22,7 +28,8 @@ pipeline
 		{
 			steps
 			{	
-				cleanWs()
+				cleanWs()	// Clean before build
+				checkout scm	// We need to explicitly checkout from SCM here
 				//sh "mvn clean install"
 			}
 		}
