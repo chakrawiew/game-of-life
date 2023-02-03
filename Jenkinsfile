@@ -38,7 +38,7 @@ pipeline
 		
 					steps
 					{
-						cleanWS()
+						cleanWs()
 						checkout scm
 						sh "mvn clean install"
 					}
@@ -57,7 +57,7 @@ pipeline
 		
 					steps
 					{
-						cleanWS()
+						cleanWs()
 						checkout scm
 						sh "mvn clean install"
 					}
