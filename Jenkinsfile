@@ -14,6 +14,12 @@ pipeline
 		}
 	}
 
+	options 
+	{
+        	skipDefaultCheckout(true)	        // This is required if you want to clean before build
+
+    	}
+
 	stages
 	{
 		stage ('Building & deploying on Slave-1')
