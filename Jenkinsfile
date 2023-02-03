@@ -1,5 +1,6 @@
+
 // Declarative pipeline ; Sequential execution.
-// Build & deploy on single slave
+// Build project on Slave and deploy on it.
 
 
 
@@ -9,13 +10,13 @@ pipeline
 	{
 		label 
 		{
-			label 'built-in'
+			label 'slave-1'
 		}
 	}
 
 	stages
 	{
-		stage ('building & packaging on jenkins-master')
+		stage ('Building project on Slave-1')
 		{
 			steps
 			{	
@@ -23,32 +24,18 @@ pipeline
 			}
 		}
 		
-		stage ('deploying war on slave-1')
+		stage ('Deploying war on Slave-1')
 		{			
 
 			steps
-			{	
-				echo "slave-1 deployment"
-				sh "ls"
-				
-				sh "scp -i /home/ec2-user/mumbai-keypair.pem  gameoflife-web/target/gameoflife.war ec2-user@172.31.14.85:/home/ec2-user/apache-tomcat-9.0.70/webapps/"
+			{		
+					echo "slave-1 deployment"
+
+					sh "rm -rf /home/ec2-user/apache-tomcat-9.0.70/webapps/gameoflife*"	
+					sh "cp gameoflife-web/target/gameoflife.war /home/ec2-user/apache-tomcat-9.0.70/webapps/"	
 
 			}
 		}
-
-		stage ('deploying war on slave-2')
-		{			
-
-			steps
-			{	
-				echo "slave-2 deployment"
-				sh "ls"
-
-				sh "scp -i /home/ec2-user/mumbai-keypair.pem  gameoflife-web/target/gameoflife.war ec2-user@172.31.13.148:/home/ec2-user/apache-tomcat-9.0.70/webapps/"
-
-			}
-		}
-
 
 	}
 }
