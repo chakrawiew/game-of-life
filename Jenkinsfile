@@ -31,6 +31,10 @@ pipeline
 			
 			steps
 			{	
+
+				cleanWs()	// Clean before build
+				checkout scm	// We need to explicitly checkout from SCM here
+
 				sh "mvn clean install"
 
 				echo "Deploying war on slave-1"
@@ -51,6 +55,10 @@ pipeline
 			
 			steps
 			{	
+
+				cleanWs()	// Clean before build
+				checkout scm	// We need to explicitly checkout from SCM here
+
 				sh "mvn clean install"
 
 				echo "Deploying war on slave-2"
