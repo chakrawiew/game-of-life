@@ -1,5 +1,5 @@
 // Declarative pipeline ; Sequential execution.
-// Build on Jenkins-Master & deploy on multiple slave.
+// Build & deploy on single slave
 
 
 
