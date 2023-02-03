@@ -30,7 +30,10 @@ pipeline
 				{
 					agent
 					{
-						label 'slave-1'
+						node
+						{
+							label 'slave-1'
+						}
 					}
 		
 					steps
@@ -46,7 +49,10 @@ pipeline
 				{
 					agent
 					{
-						label 'slave-2'
+						node
+						{
+							label 'slave-2'
+						}
 					}
 		
 					steps
