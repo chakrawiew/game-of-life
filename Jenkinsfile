@@ -1,5 +1,5 @@
 // Declarative pipeline  Parallel execution.
-// Build & deploy on multiple slave.
+// Build & deploy on multiple slave  with stop-start Tomcat
 
 
 
@@ -68,6 +68,62 @@ pipeline
 
 		}
 
+
+//-----------------------
+
+
+		stage('Stop Tomcat')	
+		{
+			parallel
+			{
+				stage('slave-1')
+				{
+					agent
+					{
+						node
+						{
+							label 'slave-1'
+						}
+					}
+		
+					steps
+					{
+						dir('/home/ec2-user/apache-tomcat-9.0.70/bin')
+						{
+							sh"sudo ./shutdown.sh"
+							sleep 20
+
+						}
+					}
+					
+				}
+
+				stage('slave-2')
+				{
+					agent
+					{
+						node
+						{
+							label 'slave-2'
+						}
+					}
+		
+					steps
+					{
+						dir('/home/ec2-user/apache-tomcat-9.0.70/bin')
+						{
+							sh"sudo ./shutdown.sh"
+							sleep 20
+
+						}
+					}
+					
+				}
+			
+			}
+
+		}
+
 //-----------------------
 
 
@@ -114,6 +170,60 @@ pipeline
 			}
 
 		}
+
+//-----------------------
+
+
+		stage('Start Tomcat')	
+		{
+			parallel
+			{
+				stage('slave-1')
+				{
+					agent
+					{
+						node
+						{
+							label 'slave-1'
+						}
+					}
+		
+					steps
+					{
+						dir('/home/ec2-user/apache-tomcat-9.0.70/bin')
+						{
+							sh"sudo ./startup.sh"
+
+						}
+					}
+					
+				}
+
+				stage('slave-2')
+				{
+					agent
+					{
+						node
+						{
+							label 'slave-2'
+						}
+					}
+		
+					steps
+					{
+						dir('/home/ec2-user/apache-tomcat-9.0.70/bin')
+						{
+							sh"sudo ./startup.sh"
+
+						}
+					}
+					
+				}
+			
+			}
+
+		}
+		
 
 	}
 }
