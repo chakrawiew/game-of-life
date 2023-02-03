@@ -1,6 +1,6 @@
 
 // Declarative pipeline ; Sequential execution.
-// Build project on Slave and deploy on it.
+// Build project on Multiple-Slave and deploy on it.
 
 
 
@@ -10,29 +10,47 @@ pipeline
 	{
 		label 
 		{
-			label 'slave-1'
+			label 'built-in'
 		}
 	}
 
 	stages
 	{
-		stage ('Building project on Slave-1')
+		stage ('Building & deploying on Slave-1')
 		{
+			agent
+			{
+				node 'slave-1'
+			}		
+			
 			steps
 			{	
 				sh "mvn clean install"
+
+				echo "Deploying war on slave-1"
+
+				sh "rm -rf /home/ec2-user/apache-tomcat-9.0.70/webapps/gameoflife*"	
+				sh "cp gameoflife-web/target/gameoflife.war /home/ec2-user/apache-tomcat-9.0.70/webapps/"
+
 			}
 		}
+
 		
-		stage ('Deploying war on Slave-1')
-		{			
-
+		stage ('Building & deploying on Slave-2')
+		{
+			agent
+			{
+				node 'slave-2'
+			}		
+			
 			steps
-			{		
-					echo "slave-1 deployment"
+			{	
+				sh "mvn clean install"
 
-					sh "rm -rf /home/ec2-user/apache-tomcat-9.0.70/webapps/gameoflife*"	
-					sh "cp gameoflife-web/target/gameoflife.war /home/ec2-user/apache-tomcat-9.0.70/webapps/"	
+				echo "Deploying war on slave-2"
+
+				sh "rm -rf /home/ec2-user/apache-tomcat-9.0.70/webapps/gameoflife*"	
+				sh "cp gameoflife-web/target/gameoflife.war /home/ec2-user/apache-tomcat-9.0.70/webapps/"
 
 			}
 		}
