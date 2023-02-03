@@ -29,8 +29,8 @@ pipeline
 
 				echo "Deploying war on slave-1"
 
-				sh "rm -rf /home/ec2-user/apache-tomcat-9.0.70/webapps/gameoflife*"	
-				sh "cp gameoflife-web/target/gameoflife.war /home/ec2-user/apache-tomcat-9.0.70/webapps/"
+				sh "sudo rm -rf /home/ec2-user/apache-tomcat-9.0.70/webapps/gameoflife*"	
+				sh "sudo cp gameoflife-web/target/gameoflife.war /home/ec2-user/apache-tomcat-9.0.70/webapps/"
 
 			}
 		}
@@ -49,8 +49,8 @@ pipeline
 
 				echo "Deploying war on slave-2"
 
-				sh "rm -rf /home/ec2-user/apache-tomcat-9.0.70/webapps/gameoflife*"	
-				sh "cp gameoflife-web/target/gameoflife.war /home/ec2-user/apache-tomcat-9.0.70/webapps/"
+				sh "sudo rm -rf /home/ec2-user/apache-tomcat-9.0.70/webapps/gameoflife*"	
+				sh "sudo cp gameoflife-web/target/gameoflife.war /home/ec2-user/apache-tomcat-9.0.70/webapps/"
 
 			}
 		}
