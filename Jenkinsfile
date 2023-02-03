@@ -1,6 +1,5 @@
-
-// Declarative pipeline ; Sequential execution.
-// Build project on Multiple-Slave and deploy on it.
+// Declarative pipeline  Parallel execution.
+// Build & deploy on multiple slave.
 
 
 
@@ -16,58 +15,53 @@ pipeline
 
 	options 
 	{
-        	skipDefaultCheckout(true)	        // This is required if you want to clean before build
+        	skipDefaultCheckout(true)	        // Skip default scm checkout
 
     	}
 
+	
 	stages
 	{
-		stage ('Building & deploying on Slave-1')
+		stage('Building & Packaging')	
 		{
-			agent
+			parallel
 			{
-				node 'slave-1'
-			}		
-			
-			steps
-			{	
-
-				cleanWs()	// Clean before build
-				checkout scm	// We need to explicitly checkout from SCM here
-
-				sh "mvn clean install"
-
-				echo "Deploying war on slave-1"
-
-				sh "sudo rm -rf /home/ec2-user/apache-tomcat-9.0.70/webapps/gameoflife*"	
-				sh "sudo cp gameoflife-web/target/gameoflife.war /home/ec2-user/apache-tomcat-9.0.70/webapps/"
-
-			}
-		}
-
+				stage('slave-1')
+				{
+					agent
+					{
+						node 'slave-1'
+					}
 		
-		stage ('Building & deploying on Slave-2')
-		{
-			agent
-			{
-				node 'slave-2'
-			}		
+					steps
+					{
+						cleanWS()
+						checkout scm
+						sh "mvn clean install"
+					}
+					
+				}
+
+				stage('slave-2')
+				{
+					agent
+					{
+						node 'slave-2'
+					}
+		
+					steps
+					{
+						cleanWS()
+						checkout scm
+						sh "mvn clean install"
+					}
+					
+				}
 			
-			steps
-			{	
-
-				cleanWs()	// Clean before build
-				checkout scm	// We need to explicitly checkout from SCM here
-
-				sh "mvn clean install"
-
-				echo "Deploying war on slave-2"
-
-				sh "sudo rm -rf /home/ec2-user/apache-tomcat-9.0.70/webapps/gameoflife*"	
-				sh "sudo cp gameoflife-web/target/gameoflife.war /home/ec2-user/apache-tomcat-9.0.70/webapps/"
-
 			}
+
 		}
+
 
 	}
 }
