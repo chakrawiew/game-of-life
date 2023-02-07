@@ -9,12 +9,20 @@ pipeline
 		label 'built-in'
 	}
 
+	options
+	{
+		skipDefaultCheckout(true)
+	}
+
 	stages
 	{
 		stage('Building & Packaging')
 		{
 			steps
 			{
+				cleanWs()
+				checkout scm
+
 				sh "mvn clean install"
 				sh "cp gameoflife-web/target/gameoflife.war /root/dockerFiles"
 			}
@@ -33,7 +41,7 @@ pipeline
 		{
 			steps
 			{
-				sh "docker run -itdp 90:8080 --name tomcat-1 myos:1.0"
+				sh "docker run -itd --name tomcat-1 -p 90:8080  myos:1.0"
 			}
 		}
 			
