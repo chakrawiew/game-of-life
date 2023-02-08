@@ -24,6 +24,7 @@ pipeline
 				checkout scm
 
 				sh "mvn clean install"
+				sh "rm -rf /root/dockerFiles/gameoflife.war"
 				sh "cp gameoflife-web/target/gameoflife.war /root/dockerFiles"
 			}
 		}
