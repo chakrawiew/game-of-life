@@ -1,0 +1,8 @@
+version: '3'
+  services:
+    tomcat:
+      build:
+        context: .
+      image: tomcat-prod
+      ports:
+        - '8081-8085:8080'
